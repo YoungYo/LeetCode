@@ -1,7 +1,5 @@
 package medium;
 
-import java.util.Arrays;
-
 public class _31_NextPermutation {
     public void nextPermutation(int[] nums) {
         if (nums == null || nums.length <= 1){
