@@ -1,8 +1,6 @@
-import sun.reflect.generics.tree.Tree;
+package medium;
 
-import java.util.ArrayDeque;
-import java.util.LinkedList;
-import java.util.Queue;
+import util.TreeNode;
 import java.util.Stack;
 
 public class _98_ValidateBinarySearchTree {

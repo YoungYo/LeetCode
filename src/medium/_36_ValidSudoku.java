@@ -1,3 +1,5 @@
+package medium;
+
 public class _36_ValidSudoku {
     public static boolean isValidSudoku(char[][] board) {
         int cur_num, record;

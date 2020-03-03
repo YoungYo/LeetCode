@@ -1,3 +1,5 @@
+package easy;
+
 public class _70_ClimbingStairs {
 
     public static int climbStairs(int n) {

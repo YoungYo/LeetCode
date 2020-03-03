@@ -1,3 +1,5 @@
+package hard;
+
 import java.util.Arrays;
 
 public class _41_FirstMissingPositive {

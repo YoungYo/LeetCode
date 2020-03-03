@@ -1,4 +1,4 @@
-import java.math.BigDecimal;
+package medium;
 
 public class _8_StringToInteger_atoi {
     public static int myAtoi(String str) {

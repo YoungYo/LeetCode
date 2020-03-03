@@ -1,3 +1,5 @@
+package medium;
+
 public class _64_MinimumPathSum {
     public static int minPathSum(int[][] grid) {
         if (grid == null)

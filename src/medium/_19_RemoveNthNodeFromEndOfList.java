@@ -1,3 +1,5 @@
+package medium;
+
 import util.ListNode;
 
 import java.util.HashMap;

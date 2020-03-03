@@ -1,3 +1,5 @@
+package hard;
+
 import util.ListNode;
 
 public class _23_MergeKSortedLists {

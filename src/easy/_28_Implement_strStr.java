@@ -1,3 +1,5 @@
+package easy;
+
 import java.util.HashMap;
 
 public class _28_Implement_strStr {
