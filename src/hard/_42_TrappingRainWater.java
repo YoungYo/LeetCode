@@ -99,19 +99,17 @@ public class _42_TrappingRainWater {
         int i = 0, j = height.length - 1;
         int maxLeft = 0, maxRight = 0, res = 0;
         while (i < j){
-            if (height[i] < height[j]){
-                if (height[i] > maxLeft){
-                    maxLeft = height[i];
-                }else {
-                    res += maxLeft - height[i];
-                }
+            if (height[i] > maxLeft){
+                maxLeft = height[i];
+            }
+            if (height[j] > maxRight){
+                maxRight = height[j];
+            }
+            if (maxLeft < maxRight){
+                res += maxLeft - height[i];
                 i++;
             }else {
-                if (height[j] > maxRight){
-                    maxRight = height[j];
-                }else {
-                    res += maxRight - height[j];
-                }
+                res += maxRight - height[j];
                 j--;
             }
         }
