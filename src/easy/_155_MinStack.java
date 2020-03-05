@@ -1,3 +1,5 @@
+package easy;
+
 import util.ListNode;
 
 public class _155_MinStack {

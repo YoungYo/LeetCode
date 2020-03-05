@@ -1,3 +1,5 @@
+package medium;
+
 public class _151_ReverseWordsInAString {
     public static String reverseWords(String s) {
         String[] sa = s.trim().split(" +");

@@ -1,3 +1,5 @@
+import easy._155_MinStack;
+
 public class Main {
     public static void main(String[] args) {
         _155_MinStack minStack = new _155_MinStack();

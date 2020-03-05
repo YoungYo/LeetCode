@@ -1,3 +1,5 @@
+package easy;
+
 import util.ListNode;
 
 import java.util.HashMap;
