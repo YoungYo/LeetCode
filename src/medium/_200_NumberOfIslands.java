@@ -1,3 +1,5 @@
+package medium;
+
 import java.util.Stack;
 
 public class _200_NumberOfIslands {

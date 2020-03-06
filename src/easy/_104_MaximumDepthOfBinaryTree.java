@@ -7,7 +7,7 @@ import java.util.Stack;
 
 public class _104_MaximumDepthOfBinaryTree {
 
-    public static int maxDepth(TreeNode root) {
+    private static int maxDepth(TreeNode root) {
         if (root == null)
 			return 0;
 		if (root.right == null && root.left == null)

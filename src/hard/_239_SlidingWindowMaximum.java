@@ -1,3 +1,5 @@
+package hard;
+
 import java.util.*;
 
 public class _239_SlidingWindowMaximum {

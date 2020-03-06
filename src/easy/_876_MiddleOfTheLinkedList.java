@@ -1,17 +1,18 @@
+package easy;
+
 import util.ListNode;
 
-public class _206_ReverseLinkedList {
-    public static ListNode reverseList(ListNode head) {
-        ListNode p = head;
-        ListNode q = head.next;
-        head.next = null;
-        while(q != null){
-            ListNode temp = q.next;
-            q.next = p;
-            p = q;
-            q = temp;
+public class _876_MiddleOfTheLinkedList {
+    public static ListNode middleNode(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while(slow.next != null && (fast.next != null && fast.next.next != null)){
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        return p;
+        if (fast.next != null)
+            slow = slow.next;
+        return slow;
     }
 
     public static void main(String[] args) {
@@ -21,7 +22,7 @@ public class _206_ReverseLinkedList {
         ListNode node4 = new ListNode(4); node3.next = node4;
         ListNode node5 = new ListNode(5); node4.next = node5;
 
-        ListNode head = reverseList(node1);
+        ListNode head = middleNode(node5);
         ListNode p = head;
         while (p != null){
             System.out.println(p.val);
@@ -29,4 +30,3 @@ public class _206_ReverseLinkedList {
         }
     }
 }
-
