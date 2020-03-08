@@ -3,8 +3,47 @@ package medium;
 import util.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class _113_PathSumII {
+    public List<List<Integer>> pathSum_iteration(TreeNode root, int sum) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null){
+            return res;
+        }
+        int[] path = new int[maxDepth(root)];
+        Stack<TreeNode> nodeStack = new Stack<>();
+        Stack<Integer> level = new Stack<>(); //记录当前访问到第几层了
+        Stack<Integer> path_sum = new Stack<>(); //记录根结点到当前结点的路径和
+        int val = root.val;
+        nodeStack.push(root);
+        level.push(0);
+        path_sum.push(val);
+        while (!nodeStack.isEmpty()){
+            TreeNode t = nodeStack.pop();
+            int curLevel = level.pop();
+            val = path_sum.pop();
+            path[curLevel] = t.val;
+            if (t.left == null && t.right == null && sum == val) { //到达了叶子结点，且路径总和正好等于sum
+                List<Integer> al = new ArrayList<>(curLevel + 1);
+                for(int i = 0; i <= curLevel; i++){
+                    al.add(path[i]);
+                }
+                res.add(al);
+            }
+            if (t.left != null){
+                nodeStack.push(t.left);
+                path_sum.push(val + t.left.val);
+                level.push(curLevel + 1);
+            }
+            if (t.right != null){
+                nodeStack.push(t.right);
+                path_sum.push(val + t.right.val);
+                level.push(curLevel + 1);
+            }
+        }
+        return res;
+    }
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
         List<List<Integer>> res = new ArrayList<>();
         int[] path = new int[maxDepth(root)];
@@ -23,10 +62,8 @@ public class _113_PathSumII {
                     al.add(curPath[i]);
                 }
                 res.add(al);
-                return;
-            }else {
-                return;
             }
+            return;
         }
 
         curPath[idx] = root.val;
@@ -70,9 +107,19 @@ public class _113_PathSumII {
         TreeNode t32 = new TreeNode(-2); t31.left = t32;
         TreeNode t33 = new TreeNode(3); t31.right = t33;
 
-        List<List<Integer>> res = ps2.pathSum(t31, -1);
+        TreeNode t = t1;
+        int sum = 22;
+        List<List<Integer>> res = ps2.pathSum(t, sum);
+        List<List<Integer>> res1 = ps2.pathSum_iteration(t, sum);
 
         for(List<Integer> list: res){
+            for(Integer i: list){
+                System.out.printf("%d, ", i);
+            }
+            System.out.println();
+        }
+
+        for(List<Integer> list: res1){
             for(Integer i: list){
                 System.out.printf("%d, ", i);
             }

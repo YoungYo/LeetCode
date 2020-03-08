@@ -1,3 +1,5 @@
+package hard;
+
 import java.util.*;
 
 public class _315_CountOfSmallerNumbersAfterSelf_MergeSort {
@@ -20,9 +22,9 @@ public class _315_CountOfSmallerNumbersAfterSelf_MergeSort {
             Elem elem = new Elem(nums[i], i);
             elems[i] = elem;
         }
-//        Elem[] sorted = mergeSort(elems, 0, len);
+//        hard.Elem[] sorted = mergeSort(elems, 0, len);
         mergeSort_recursion(elems, 0, len);
-//        for (Elem i: sorted){
+//        for (hard.Elem i: sorted){
 //            System.out.print(i.val + ", ");
 //        }
 //        System.out.println();
@@ -85,7 +87,7 @@ public class _315_CountOfSmallerNumbersAfterSelf_MergeSort {
         int[] input = {26,78,27,100,33,67,90,23,66,5,38,7,35,23,52,22,83,51,98,69,81,32,78,28,94,13,2,97,3,76,99,51,9,21,84,66,65,36,100,41};
 //        int[] input =   {26,78,27,100,33,78};
 //        int[] help = new int[input.length];
-//        BinaryIndexedTree bit = new BinaryIndexedTree(input);
+//        util.BinaryIndexedTree bit = new util.BinaryIndexedTree(input);
 //        int[] sorted = mergeSort(input, 0, input.length);
 //        for(int i: sorted){
 //            System.out.print(i + ", ");

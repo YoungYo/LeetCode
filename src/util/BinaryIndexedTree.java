@@ -1,3 +1,5 @@
+package util;
+
 public class BinaryIndexedTree {
     public int[] BIT;
     public int[] A;

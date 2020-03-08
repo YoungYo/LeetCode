@@ -1,3 +1,5 @@
+package easy;
+
 public class _344_ReverseString {
     public static void reverseString_bitoperation(char[] s) {
         int i = 0, j, a, b, len = s.length;
