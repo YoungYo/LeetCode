@@ -20,11 +20,32 @@ public class _55_JumpGame {
         return res[len - 1];
     }
 
+    public boolean canJump2(int[] nums) {
+        if (nums == null || nums.length == 0 || (nums.length > 1 && nums[0] == 0)) return false;
+        if (nums.length == 1) return true;
+        for (int i = nums.length - 2; i >= 0; i--) {
+            if (nums[i] == 0) {
+                int j = i - 1;
+                while (j >= 0) {
+                    if (nums[j] > i - j) break;
+                    j--;
+                }
+                if (j == -1)
+                    return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
-        int[] intput1 = {2,3,1,1,4};
-        int[] intput2 = {3,2,1,0,4};
+        int[] input1 = {2,3,1,1,4};
+        int[] input2 = {3,2,1,0,4};
+        int[] input3 = {2,5,0,0};
 
         _55_JumpGame jg = new _55_JumpGame();
-        System.out.println(jg.canJump(intput2));
+
+        int[] input = input1;
+        System.out.println(jg.canJump(input));
+        System.out.println(jg.canJump2(input));
     }
 }
