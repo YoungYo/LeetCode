@@ -3,6 +3,11 @@ package hard;
 import java.util.Arrays;
 
 public class _45_JumpGameII {
+    /**
+     * This is an implicit bfs solution. i == curEnd means you visited all the items on the current level.
+     * Incrementing step++ is like incrementing the level you are on.
+     * And curEnd = curFarthest is like getting the queue size (level size) for the next level you are traversing.
+     */
     public int jump(int[] nums) {
         if (nums.length == 1)
             return 0;
