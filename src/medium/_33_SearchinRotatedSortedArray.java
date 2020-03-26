@@ -51,6 +51,9 @@ public class _33_SearchinRotatedSortedArray {
     public static void main(String[] args) {
         _33_SearchinRotatedSortedArray srsa = new _33_SearchinRotatedSortedArray();
         int[] nums1 = {4,5,6,7,0,1,2};
-        System.out.println(srsa.search(nums1, 3));
+        int[] nums2 = {7,8,1,2,3,4,5,6};
+        int[] nums = nums2;
+        int target = 2;
+        System.out.println(srsa.search(nums, target));
     }
 }
