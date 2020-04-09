@@ -1,8 +1,5 @@
 package medium;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class _79_WordSearch {
     char[][] board;
     String word;
