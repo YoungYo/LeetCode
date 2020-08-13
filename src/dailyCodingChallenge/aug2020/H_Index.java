@@ -2,6 +2,9 @@ package dailyCodingChallenge.aug2020;
 
 import java.util.Arrays;
 
+/**
+ * @author 王浩
+ */
 public class H_Index {
     public int hIndex(int[] citations) {
         Arrays.sort(citations);
