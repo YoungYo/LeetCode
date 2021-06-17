@@ -1,0 +1,63 @@
+    class LRUCache {
+        private class Node {
+            Node prev;
+            Node next;
+            int key;
+            int value;
+            public Node(int key, int value) {
+                this.key = key;
+                this.value = value;
+            }
+        }
+        private Node head;
+        private Node tail;
+        private HashMap<Integer, Node> elements;
+        private int capacity;
+
+        public LRUCache(int capacity) {
+            this.head = new Node(-1, -1);
+            this.tail = new Node(-1, -1);
+            join(this.head, this.tail);
+            elements = new HashMap<>(capacity);
+            this.capacity = capacity;
+        }
+
+        public void join(Node node1, Node node2) {
+            node1.next = node2;
+            node2.prev = node1;
+        }
+
+        public int get(int key) {
+            Node node = elements.get(key);
+            if (Objects.isNull(node)) {
+                return -1;
+            }
+            join(node.prev, node.next);
+            Node temp = this.head.next;
+            join(this.head, node);
+            join(node, temp);
+            return node.value;
+        }
+
+        public void put(int key, int value) {
+            Node node = new Node(key, value);
+            if (elements.containsKey(key)) {
+                node = elements.get(key);
+                node.value = value;
+            } else if (elements.size() >= capacity) {
+                Integer lruKey = tail.prev.key;
+                Node lruNode = elements.remove(lruKey);
+                join(lruNode.prev, tail);
+            }
+            Node temp = this.head.next;
+            join(this.head, node);
+            join(node, temp);
+            elements.put(key, node);
+        }
+    }
+
+//total_testcases:21
+//total_correct:13
+//input_formatted:"[\"LRUCache\",\"put\",\"put\",\"put\",\"put\",\"get\",\"get\"],[[2],[2,1],[1,1],[2,3],[4,1],[1],[2]]"
+//expected_output:[null,null,null,null,null,-1,3]
+//code_output:[null,null,null,null,null,1,-1]

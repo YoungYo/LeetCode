@@ -54,22 +54,44 @@
 package leetcode.editor.en;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Objects;
 
 public class LruCache {
     public static void main(String[] args) {
+        String[][] operatings = {
+           {"LRUCache","put","put","put","put","get","get"}
+        };
+
+        int[][][] inputs = {
+           {{2},{2,1},{1,1},{2,3},{4,1},{1},{2}}
+        };
+
+        Integer[][] outputs = {
+           {null,null,null,null,null,-1,3}
+        };
+
+        int n = 0;
+        String[] operating = operatings[n];
+        int[][] input = inputs[n];
         LRUCache obj = new LruCache().new LRUCache(2);
-        obj.put(1, 1);
-        obj.put(2, 2);
-        int param_1 = obj.get(1);
-        obj.put(3, 3);
-        int param_2 = obj.get(2);
-        obj.put(4, 4);
-        int param_3 = obj.get(1);
-        int param_4 = obj.get(3);
-        int param_5 = obj.get(4);
-        int a = 0;
+        for (int i = 0; i < operating.length; i++) {
+            String operation = operating[i];
+            switch (operation) {
+                case "LRUCache":
+                    obj.capacity = input[i][0];
+                    System.out.print("null");
+                    break;
+                case "put":
+                    obj.put(input[i][0], input[i][1]);
+                    System.out.print("null");
+                    break;
+                case "get": System.out.print(obj.get(input[i][0])); break;
+                default:
+            }
+            if (i != operating.length - 1) {
+                System.out.print(",");
+            }
+        }
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     class LRUCache {
@@ -116,15 +138,17 @@ public class LruCache {
         public void put(int key, int value) {
             Node node = new Node(key, value);
             if (elements.containsKey(key)) {
-                node = elements.get(key);
-                node.value = value;
+                Node duplicateNode = elements.get(key);
+                join(duplicateNode.prev, duplicateNode.next);
             } else if (elements.size() >= capacity) {
                 Integer lruKey = tail.prev.key;
-                elements.remove(lruKey);
+                Node lruNode = elements.remove(lruKey);
+                join(lruNode.prev, tail);
             }
             Node temp = this.head.next;
             join(this.head, node);
             join(node, temp);
+            elements.put(key, node);
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
