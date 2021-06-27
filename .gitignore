@@ -1,3 +1,4 @@
 .idea
 out
 *.iml
+src/leetcode/editor/en/all.json
