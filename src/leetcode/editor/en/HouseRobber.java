@@ -48,6 +48,20 @@ public class HouseRobber {
     class Solution {
         public int rob(int[] nums) {
             int len = nums.length;
+            int[] dp = new int[len];
+            dp[0] = nums[0];
+            for (int i = 1; i < len; i++) {
+                if (i == 1) {
+                    // 前两个数特殊处理
+                    dp[i] = Math.max(dp[i-1], nums[i]);
+                } else {
+                    dp[i] = Math.max(dp[i-1], nums[i] + dp[i - 2]);
+                }
+            }
+            return dp[len - 1];
+        }
+        /*public int rob(int[] nums) {
+            int len = nums.length;
             int prePre = 0, pre = nums[0], result = nums[0];
             for (int i = 1; i < len; i++) {
                 result = Math.max(pre, prePre + nums[i]);
@@ -55,7 +69,7 @@ public class HouseRobber {
                 pre = result;
             }
             return result;
-        }
+        }*/
     }
     //leetcode submit region end(Prohibit modification and deletion)
 }
