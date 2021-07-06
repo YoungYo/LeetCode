@@ -40,7 +40,28 @@ import java.util.Objects;
 
 public class ReverseLinkedListIi {
     public static void main(String[] args) {
-         Solution solution = new ReverseLinkedListIi().new Solution();
+        Solution solution = new ReverseLinkedListIi().new Solution();
+        int[][][] params = {
+                {{1,2,3,4,5}, {2}, {4}},
+                {{3,5}, {1}, {2}},
+                {{3,5}, {1}, {1}},
+                {{5}, {1}, {1}}
+        };
+        int n = 0;
+        ListNode headPre = new ListNode(-1);
+        ListNode p = headPre;
+
+        for (int i = 0; i < params[n][0].length; i++) {
+            p.next = new ListNode(params[n][0][i]);
+            p = p.next;
+        }
+        ListNode result = solution.reverseBetween(headPre.next, params[n][1][0], params[n][2][0]);
+        p = result;
+        while (Objects.nonNull(p)) {
+            System.out.print(p.val);
+            System.out.print(", ");
+            p = p.next;
+        }
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 /**
@@ -55,13 +76,37 @@ public class ReverseLinkedListIi {
  */
 class Solution {
     public ListNode reverseBetween(ListNode head, int left, int right) {
-        ListNode p = head.next, leftPre = head;
-        while (Objects.nonNull(p) && p.val != left) {
+        if (left == right) {
+            return head;
+        }
+        ListNode p = head, headPre = new ListNode(-1);
+        headPre.next = head;
+        ListNode leftPre = headPre;
+        int i = 1;
+        while (i < left && Objects.nonNull(p)) {
             p = p.next;
             leftPre = leftPre.next;
+            i++;
         }
-        ListNode t = p.next;
-        while (Objects.nonNull(t) &&)
+        if (Objects.isNull(p) || Objects.isNull(p.next)) {
+            return head;
+        }
+        ListNode leftNode = p;
+        ListNode q = p.next;
+        ListNode t;
+        while (true) {
+            t = q.next;
+            q.next = p;
+            p = q;
+            i++;
+            if (Objects.isNull(t) || i == right) {
+                break;
+            }
+            q = t;
+        }
+        leftPre.next = q;
+        leftNode.next = t;
+        return headPre.next;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
