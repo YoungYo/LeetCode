@@ -47,24 +47,25 @@
   
 package leetcode.editor.en;
 
-import java.net.Inet4Address;
 import java.util.*;
 
 public class CourseSchedule {
     public static void main(String[] args) {
          Solution solution = new CourseSchedule().new Solution();
-         int[] numCourses = {1, 20};
+         int[] numCourses = {1, 20, 2, 2};
          int[][][] prerequisites = {
                  {},
-                 {{0,10},{3,18},{5,5},{6,11},{11,14},{13,1},{15,1},{17,4}}
+                 {{0,10},{3,18},{5,5},{6,11},{11,14},{13,1},{15,1},{17,4}},
+                 {{1, 0}},
+                 {{1, 0}, {0, 1}}
          };
-         int n = 1;
+         int n = 3;
          boolean result = solution.canFinish(numCourses[n], prerequisites[n]);
         System.out.println(result);
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        // 邻接表实现
+        // 邻接表实现广度优先搜索
 /*
         public boolean canFinish(int numCourses, int[][] prerequisites) {
             if (prerequisites.length == 0) {
@@ -107,35 +108,31 @@ public class CourseSchedule {
             }
         }
 */
+        // 邻接矩阵，广度优先搜索
+/*
         public boolean canFinish(int numCourses, int[][] prerequisites) {
             if (prerequisites.length == 0) {
                 return true;
             }
             int[][] matrix = new int[numCourses][numCourses];
             int[] inDegree = new int[numCourses];
-            boolean[] hasNode = new boolean[numCourses];
-            for (int i = 0; i < numCourses; i++) {
-                inDegree[i] = -1;
-            }
             for (int[] prerequisite : prerequisites) {
-                inDegree[prerequisite[1]]++;
                 matrix[prerequisite[0]][prerequisite[1]] = 1;
-                hasNode[prerequisite[0]] = true;
-                hasNode[prerequisite[1]] = true;
+                inDegree[prerequisite[1]]++;
                 if (prerequisite[0] == prerequisite[1]) {
                     return false;
                 }
             }
             Queue<Integer> queue = new LinkedList<>();
             for (int i = 0; i < numCourses; i++) {
-                if (inDegree[i] == 0 || hasNode[i]) {
+                if (inDegree[i] == 0) {
                     queue.offer(i);
-                    break;
                 }
             }
+            int count = 0;
             while (!queue.isEmpty()) {
                 Integer course = queue.poll();
-                hasNode[course] = false;
+                count++;
                 for (int i = 0; i < numCourses; i++) {
                     if (matrix[course][i] == 1) {
                         if (--inDegree[i] == 0) {
@@ -144,7 +141,28 @@ public class CourseSchedule {
                     }
                 }
             }
+            return count == numCourses;
         }
+*/
+        // 邻接表，深度优先搜索
+        public boolean canFinish(int numCourses, int[][] prerequisites) {
+            ArrayList<Integer>[] graph = new ArrayList[numCourses];
+            for (int[] prerequisite: prerequisites) {
+                int pre = prerequisite[0];
+                int ready = prerequisite[1];
+                if (graph[ready] == null) {
+                    graph[ready] = new ArrayList<>(numCourses);
+                }
+                graph[ready].add(pre);
+            }
+            boolean[] visited = new boolean[numCourses];
+            boolean[] finished = new boolean[numCourses];
+            for (int i = 0; i < numCourses; i++) {
+
+            }
+        }
+
+        public boolean dfs(ArrayList<Integer>[] graph, boolean[] )
     }
     //leetcode submit region end(Prohibit modification and deletion)
 
