@@ -47,7 +47,7 @@
   
 package leetcode.editor.en;
 
-import java.util.*;
+import java.util.LinkedList;
 
 public class CourseSchedule {
     public static void main(String[] args) {
@@ -59,7 +59,7 @@ public class CourseSchedule {
                  {{1, 0}},
                  {{1, 0}, {0, 1}}
          };
-         int n = 3;
+         int n = 1;
          boolean result = solution.canFinish(numCourses[n], prerequisites[n]);
         System.out.println(result);
     }
@@ -146,24 +146,43 @@ public class CourseSchedule {
 */
         // 邻接表，深度优先搜索
         public boolean canFinish(int numCourses, int[][] prerequisites) {
-            ArrayList<Integer>[] graph = new ArrayList[numCourses];
+            LinkedList<Integer>[] graph = new LinkedList[numCourses];
+            for (int i = 0; i < numCourses; i++) {
+                graph[i] = new LinkedList<>();
+            }
             for (int[] prerequisite: prerequisites) {
                 int pre = prerequisite[0];
                 int ready = prerequisite[1];
-                if (graph[ready] == null) {
-                    graph[ready] = new ArrayList<>(numCourses);
-                }
                 graph[ready].add(pre);
             }
             boolean[] visited = new boolean[numCourses];
             boolean[] finished = new boolean[numCourses];
             for (int i = 0; i < numCourses; i++) {
-
+                if (!visited[i]) {
+                    if (isCycle(graph, visited, finished, i)) {
+                        return false;
+                    }
+                }
             }
+            return true;
         }
 
-        public boolean dfs(ArrayList<Integer>[] graph, boolean[] )
+        private boolean isCycle(LinkedList<Integer>[] graph, boolean[] visited, boolean[] finished, int i) {
+            if (visited[i]) {
+                return true;
+            }
+            visited[i] = true;
+            LinkedList<Integer> nodes = graph[i];
+            for (Integer node : nodes) {
+                if (!finished[node]) {
+                    if (isCycle(graph, visited, finished, node)) {
+                        return true;
+                    }
+                }
+            }
+            finished[i] = true;
+            return false;
+        }
     }
     //leetcode submit region end(Prohibit modification and deletion)
-
 }
