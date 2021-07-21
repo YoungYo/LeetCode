@@ -31,38 +31,42 @@ public class KthLargestElementInAnArray {
         int[][] nums = {
                 {1,2,3,4,5,6,7,8,9},
                 {9,8,8,7,6,5,4},
-                {3,2,1,5,6,4}
+                {3,2,1,5,6,4},
+                {3,2,3,1,2,4,5,5,6}
         };
-        int[] k = {4, 3, 2};
-        int n = 2;
+        int[] k = {4, 3, 2, 4};
+        int n = 3;
         System.out.println(solution.findKthLargest(nums[n], k[n]));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int findKthLargest(int[] nums, int k) {
-            return findKthLargest(nums, 0, nums.length - 1, k);
+            return findKthLargest(nums, 0, nums.length - 1, k - 1);
         }
         private int findKthLargest(int[] nums, int p, int r, int k) {
-            int partition = partition(nums, p, r);
-            if (partition == k - 1) {
-                return nums[partition];
-            } else if (partition < k - 1) {
-                return findKthLargest(nums, partition + 1, r, k);
-            } else {
-                return findKthLargest(nums, p, partition - 1, k);
+            if (p >= r) {
+                return nums[k];
             }
-        }
-        private int partition(int[] nums, int p, int r) {
-            int pivot = nums[r];
-            int i = p;
-            for (int j = p; j < r; j++) {
-                if (nums[j] > pivot) {
-                    swap(nums, i, j);
-                    i++;
+            int pivot = nums[p + (r - p) / 2];
+            int left = p, right = r;
+            while (left <= right) {
+                while (left <= right && nums[left] > pivot) {
+                    left++;
+                }
+                while (left <= right && nums[right] < pivot) {
+                    right--;
+                }
+                if (left <= right) {
+                    swap(nums, left, right);
+                    left++;
+                    right--;
                 }
             }
-            swap(nums, i, r);
-            return i;
+            if (right < k) {
+                return findKthLargest(nums, left, r, k);
+            } else {
+                return findKthLargest(nums, p, right, k);
+            }
         }
 
         private void swap(int[] nums, int i, int j) {
