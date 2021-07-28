@@ -88,35 +88,21 @@ public class LowestCommonAncestorOfABinaryTree {
      * }
      */
     class Solution {
-        TreeNode p, q, result = null, childP = null, childQ = null;
-
         public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-            this.p = p;
-            this.q = q;
-            afterOrder(root);
-            return result;
-        }
-
-        public void afterOrder(TreeNode root) {
-            if (Objects.nonNull(result)) {
-                return;
+            if (Objects.isNull(root)) {
+                return null;
             }
-            if (Objects.equals(root, this.p)) {
-                this.childP = root;
-                return;
+            if (root.val == p.val || root.val == q.val) {
+                return root;
             }
-            if (Objects.equals(root, this.q)) {
-                this.childQ = root;
-                return;
-            }
-            if (root.left != null) {
-                afterOrder(root.left);
-            }
-            if (root.right != null) {
-                afterOrder(root.right);
-            }
-            if (this.childP != null && this.childQ != null) {
-                this.result = root;
+            TreeNode pLeft = lowestCommonAncestor(root.left, p, q);
+            TreeNode pRight = lowestCommonAncestor(root.right, p, q);
+            if (Objects.isNull(pLeft)) {
+                return pRight;
+            } else if (Objects.isNull(pRight)) {
+                return pLeft;
+            } else {
+                return root;
             }
         }
     }
