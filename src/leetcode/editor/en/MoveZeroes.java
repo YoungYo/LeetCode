@@ -48,6 +48,7 @@ public class MoveZeroes {
         }
     }
     //leetcode submit region begin(Prohibit modification and deletion)
+/*
     class Solution {
         public void moveZeroes(int[] nums) {
             int nextNonZero = 0, len = nums.length;
@@ -59,6 +60,26 @@ public class MoveZeroes {
                         nums[nextNonZero] = nums[nextNonZero] ^ nums[i];
                     }
                     nextNonZero++;
+                }
+            }
+        }
+    }
+*/
+    class Solution {
+        public void moveZeroes(int[] nums) {
+            int length = nums.length;
+            if (length == 0) {
+                return;
+            }
+            int slow = 0;
+            for (int fast = 0; fast < length; fast++) {
+                if (nums[fast] != 0) {
+                    if (slow != fast) {
+                        nums[slow] = nums[slow] ^ nums[fast];
+                        nums[fast] = nums[slow] ^ nums[fast];
+                        nums[slow] = nums[slow] ^ nums[fast];
+                    }
+                    slow++;
                 }
             }
         }
