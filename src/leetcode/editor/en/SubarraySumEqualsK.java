@@ -22,14 +22,40 @@
 
   
 package leetcode.editor.en;
+
+import java.util.HashMap;
+
 public class SubarraySumEqualsK {
     public static void main(String[] args) {
-         Solution solution = new SubarraySumEqualsK().new Solution();
+        Solution solution = new SubarraySumEqualsK().new Solution();
+        int[][] inputs = {
+                {1,1,1},
+                {1,2,3}
+        };
+        int[] k = {1, 2};
+        int n = 0;
+        System.out.println(solution.subarraySum(inputs[n], k[n]));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int subarraySum(int[] nums, int k) {
-
+            int length = nums.length;
+            if (length == 1) {
+                return k == nums[0] ? 1 : 0;
+            }
+            int result = 0;
+            HashMap<Integer, Integer> map = new HashMap<>(length);
+            map.put(0, 1);
+            for (int i = 1; i < length; i++) {
+                nums[i] = nums[i - 1] + nums[i];
+            }
+            for (int i = 0; i < length; i++) {
+                Integer sumOccurTimes = map.getOrDefault(nums[i], 0);
+                Integer sumMinusKOccurTimes = map.getOrDefault(nums[i] - k, 0);
+                result += sumMinusKOccurTimes;
+                map.put(nums[i], sumOccurTimes + 1);
+            }
+            return result;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
