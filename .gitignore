@@ -2,4 +2,5 @@
 out
 *.iml
 src/leetcode/editor/en/all.json
+src/leetcode/editor/en/doc/all.json
 .DS_Store
