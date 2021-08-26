@@ -98,7 +98,6 @@ public class LinkedListCycleIi {
                 temp = temp.next;
                 cycleLength++;
             }
-//            System.out.println("Cycle Length: " + cycleLength);
             ListNode startNode = head, endNode = head;
             for (int i = 1; i < cycleLength; i++) {
                 endNode = endNode.next;

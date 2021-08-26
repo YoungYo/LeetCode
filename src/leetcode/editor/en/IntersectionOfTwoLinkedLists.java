@@ -73,56 +73,73 @@ package leetcode.editor.en;
 
 import util.ListNode;
 
-import java.util.Objects;
-
 public class IntersectionOfTwoLinkedLists {
     public static void main(String[] args) {
          Solution solution = new IntersectionOfTwoLinkedLists().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
- * }
- */
-public class Solution {
-    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        int lengthA = 0, lengthB = 0;
-        ListNode p = headA, q = headB;
-        while (Objects.nonNull(p)) {
-            lengthA++;
-            p = p.next;
+    /**
+     * Definition for singly-linked list.
+     * public class ListNode {
+     *     int val;
+     *     ListNode next;
+     *     ListNode(int x) {
+     *         val = x;
+     *         next = null;
+     *     }
+     * }
+     */
+    public class Solution {
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            ListNode p = headA, q = headB;
+            while (p != q) {
+                if (p == null) {
+                    p = headB;
+                } else {
+                    p = p.next;
+                }
+
+                if (q == null) {
+                    q = headA;
+                } else {
+                    q = q.next;
+                }
+            }
+            return p;
         }
-        while (Objects.nonNull(q)) {
-            lengthB++;
-            q = q.next;
-        }
-        p = headA;
-        q = headB;
-        int diff = Math.abs(lengthA - lengthB);
-        if (lengthA > lengthB) {
-            for (int i = 0; i < diff; i++) {
+/*
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+            int lengthA = 0, lengthB = 0;
+            ListNode p = headA, q = headB;
+            while (Objects.nonNull(p)) {
+                lengthA++;
                 p = p.next;
             }
-        }
-        if (lengthB > lengthA) {
-            for (int i = 0; i < diff; i++) {
+            while (Objects.nonNull(q)) {
+                lengthB++;
                 q = q.next;
             }
+            p = headA;
+            q = headB;
+            int diff = Math.abs(lengthA - lengthB);
+            if (lengthA > lengthB) {
+                for (int i = 0; i < diff; i++) {
+                    p = p.next;
+                }
+            }
+            if (lengthB > lengthA) {
+                for (int i = 0; i < diff; i++) {
+                    q = q.next;
+                }
+            }
+            while (!Objects.equals(p, q)) {
+                p = p.next;
+                q = q.next;
+            }
+            return p;
         }
-        while (!Objects.equals(p, q)) {
-            p = p.next;
-            q = q.next;
-        }
-        return p;
+*/
     }
-}
-//leetcode submit region end(Prohibit modification and deletion)
+    //leetcode submit region end(Prohibit modification and deletion)
 
 }
