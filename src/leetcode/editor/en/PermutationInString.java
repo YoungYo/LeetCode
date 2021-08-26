@@ -35,13 +35,14 @@ package leetcode.editor.en;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class PermutationInString {
     public static void main(String[] args) {
          Solution solution = new PermutationInString().new Solution();
          String[][] inputs = {
+                 {"ab", "eidboaoo"},
                  {"ab", "eidbaooo"},
-                 {"ab", "eidboaoo"}
          };
          for (String[] input: inputs) {
              System.out.println(solution.checkInclusion(input[0], input[1]));
@@ -58,24 +59,27 @@ public class PermutationInString {
             }
             while (right < s2.length()) {
                 char c = s2.charAt(right);
-                Integer cCount = need.getOrDefault(c, 0);
                 right++;
-                if (cCount == 0) {
-                    left = right + 1;
-                    continue;
-                } else {
-                    windows.put(c, windows.getOrDefault(c, 0));
-                    valid++;
+                int cCount = need.getOrDefault(c, 0);
+                if (cCount > 0) {
+                    windows.put(c, windows.getOrDefault(c, 0) + 1);
+                    if (Objects.equals(windows.get(c), cCount)) {
+                        valid++;
+                    }
                 }
-                int leftCharCount;
-                char leftChar = s2.charAt(left);
-                while ((leftCharCount = windows.getOrDefault(leftChar, 0)) > need.getOrDefault(leftChar, 0)) {
-                    windows.put(s2.charAt(left), leftCharCount - 1);
+                while (right - left >= s1Length) {
+                    if (valid == need.size()) {
+                        return true;
+                    }
+                    char d = s2.charAt(left);
+                    Integer dCount = need.getOrDefault(d, 0);
+                    if (dCount > 0) {
+                        if (Objects.equals(windows.get(d), dCount)) {
+                            valid--;
+                        }
+                        windows.put(d, windows.getOrDefault(d, 0) - 1);
+                    }
                     left++;
-                    valid--;
-                }
-                if (valid == s1Length) {
-                    return true;
                 }
             }
             return false;
