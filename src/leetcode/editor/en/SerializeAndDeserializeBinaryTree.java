@@ -55,13 +55,13 @@
   
 package leetcode.editor.en;
 
-import util.Array2BinaryTree;
+import util.BinaryTreeUtil;
 import util.TreeNode;
 
 public class SerializeAndDeserializeBinaryTree {
     public static void main(String[] args) {
         Codec solution = new SerializeAndDeserializeBinaryTree().new Codec();
-        TreeNode root = Array2BinaryTree.buildTree(new Integer[]{1,2,3,null,null,4,5});
+        TreeNode root = BinaryTreeUtil.buildTree(new Integer[]{1,2,3,null,null,4,5});
 //        TreeNode root = Array2BinaryTree.buildTree(new Integer[]{});
 //        TreeNode root = Array2BinaryTree.buildTree(new Integer[]{1});
 //        TreeNode root = Array2BinaryTree.buildTree(new Integer[]{1, 2});

@@ -1,6 +1,6 @@
 package medium;
 
-import util.Array2BinaryTree;
+import util.BinaryTreeUtil;
 import util.TreeNode;
 
 import java.util.Objects;
@@ -19,7 +19,7 @@ public class _450_DeleteNodeinaBST {
                 {{}, {0}}
         };
         for (Integer[][] input: inputs) {
-            TreeNode root = solution.deleteNode(Array2BinaryTree.buildTree(input[0]), input[1][0]);
+            TreeNode root = solution.deleteNode(BinaryTreeUtil.buildTree(input[0]), input[1][0]);
             int a = 0;
         }
     }

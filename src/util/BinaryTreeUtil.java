@@ -1,10 +1,15 @@
 package util;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Queue;
+
 /**
  * @author 王浩
  * @date 2021/8/24 12:33 上午
  */
-public class Array2BinaryTree {
+public class BinaryTreeUtil {
 
     public static TreeNode buildTree(Integer[] values) {
         if (values == null || values.length == 0) {
@@ -30,6 +35,28 @@ public class Array2BinaryTree {
             }
         }
         return nodes[0];
+    }
+
+    public static List<Integer> binaryTreeToList(TreeNode root) {
+        List<Integer> result = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (Objects.nonNull(node)) {
+                result.add(node.val);
+                if (Objects.nonNull(node.left)) {
+                    queue.offer(node.left);
+                }
+                if (Objects.nonNull(node.right)) {
+                    queue.offer(node.left);
+                    queue.offer(node.right);
+                }
+            } else {
+                result.add(null);
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) {
