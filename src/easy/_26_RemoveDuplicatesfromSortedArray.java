@@ -12,7 +12,7 @@ import java.util.Objects;
 public class _26_RemoveDuplicatesfromSortedArray {
     public static void main(String[] args) {
     	int[][] inputs = {
-				{0,0,1,1,1,2,2,3,3,4},
+				{0, 0, 1, 1, 1, 2, 2, 3, 3, 4},
 				{1, 1, 2},
 		};
         Solution solution = new _26_RemoveDuplicatesfromSortedArray().new Solution();
